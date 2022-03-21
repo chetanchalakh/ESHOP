@@ -1,0 +1,78 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block css %} <style>
+    .card {
+        background-color: cornsilk ;
+
+    }
+</style>
+{% endblock css %}
+{% block content %}
+
+<div class="container-fluid mt-3 mx-1">
+    <div class="row">
+        <div class="col-lg-5 ">
+            {% if cart %}
+            <h4 class="text-center card-header bg-light mx-3"> Shopping Cart </h4>
+            {% for item in cart %}
+            <div class="card mb-3 mx-3 my-2" style="max-width: 540px;">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="{{item.product.image.url}}" class="card-img" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{item.product.name}}</h5>
+                            <p class="card-text">Last updated 3 mins ago</p>
+                            <p class="card-text">
+                                    <div class="my-3"> <label for="quantity">Quantity</label>
+                                        <a class="minus-cart btn" pid="{{cart.product.id}}"><i
+                                                class="fas fa-minus-square fa-lg"></i> </a>
+                                        <span id="quantity">{{item.quantity}} </span>
+                                        <a class="plus-cart btn" pid="{{cart.product.id}}"> <i
+                                                class="fas fa-plus-square fa-lg"></i> </a>
+
+                                    </div>
+                             
+                            <form class="d-inline" action="{% url 'remove' item.id %}" method="post">
+                                {% csrf_token %}
+                                <input id="button"  class="btn btn-light border-success" type="submit" value="Remove">
+                            </form>
+                            <!-- <a href="#" class="btn btn-light border-success">Remove</a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-sm-5">
+            <div class="card" style="width: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Total Cost</h5>
+                    <p class="card-text">Amount : <b>{{amount}} </b></p>
+                    <p class="card-text">Shipping Cost : <b>40 Rs</b></p>
+                    <hr>
+                    <p class="card-text"> Total Amount : <b> {{totalamount}} </b></p>
+                    <a id="button"  href="{% url 'checkout'  %}" class="btn btn-primary">Placed Order </a>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="container-fluid mt-3 mx-1">
+            <div class="col-sm-8">
+                <div class="card" style="width: 20rem;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">{{empty}}</h5>
+                        <img class="card-img-top shadow" src="{% static 'cartimage.png' %}" alt="Card image cap">
+                        <!-- { static 'store/store/images/cartimage.png' } -->
+                        <a id="button"  href="{% url 'home' %}" class=" btn btn-primary mt-2 mx-5">Continue Shopping</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+</div>
+</div>
+{% endblock content %}

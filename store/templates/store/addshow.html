@@ -1,0 +1,54 @@
+{% extends 'store/base.html' %}
+{% block content %}
+<div class="container-fluid mt-3 mx-1">
+    <div class="row">
+        <div class="col-lg-3 mx-auto">
+            <h4 class="text-center alert alert-primary">Add new Book</h4>
+            <form action="" method="POST" enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
+                 {{form.label_tag}} {{form}} {{form.errors|striptags}} <br><br>
+                <input id="button"  type="submit" class="btn btn-success" value="Add">
+            </form>
+        </div>
+        <div class="col-sm-8 ">
+            <h4 class="text-center alert alert-primary">List of Book</h4>
+            {% if stu %}
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Author</th>
+                        <th scope="col">Catagory</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Image</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for st in stu %}
+                    <tr>
+                        <th scope="row">{{st.id}}</th>
+                        <td>{{st.name}}</td>
+                        <td>{{st.auth_name}}</td>
+                        <td>{{st.catagory_id}}</td>
+                        <td>{{st.price}}</td>
+                        <td><img class="rounded float-right" width="140px" height="110px" src="{{st.image.url}}"
+                                alt="Card image cap"></td>
+                        <td> <a id="button"  href="{% url 'updatebook' st.id %}" class="btn btn-warning">View</a>
+                            <form class="d-inline" action="{% url 'delete' st.id %}" method="post">
+                                {% csrf_token %}
+                                {% if perms.store.delete_product %}
+                                <input id="button"  class="btn btn-danger" type="submit" value="Delete">
+                                {% endif %}
+                            </form>
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

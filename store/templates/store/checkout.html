@@ -1,0 +1,118 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block css %} <style>
+
+</style>
+{% endblock css %}
+{% block content %}
+
+<div class="container-fluid mt-3 mx-1">
+    <div class="row">
+        <div class="col-lg-5">
+
+            <h4 class="text-center">Order Summary</h4>
+            {% for item in cart %}
+
+            <div class="card">
+                <div class="card-body">
+                    <p> <b> Product</b> : {{item.product.name}} </p>
+                    <p> <b>Quantity</b> : {{item.quantity}} </p>
+                    <p> <b> Price : </b>{{item.total_cost}} </p>
+                </div>
+            </div>
+
+            {% endfor %}
+            <div class="card text-center">
+                <p class="fw-bold">Total Cost + Rs. 40 = {{totalamount}} </p>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <h4 class="text-center">Shipping Address</h4>
+
+            {% if add %}
+            <form action="/paymentdone">
+
+                {% csrf_token %}
+                {% for ad in add %}
+                <div class="row">
+                    <div class="card" style="width: 20rem;">
+                        <div class="form-check mt-2 mb-5">
+                            <input checked class="form-check-input" type="radio" name="custid" id="custid{{forloop.counter}}"
+                                value="{{ad.id}}">
+                            <div class="card-body">
+                                <h5 class="card-title"> Address : {{forloop.counter}} </h5>
+
+                                <p class="card-text">{{ad.name}} </p>
+                                <p class="card-text"> {{ad.locality}} </p>
+                                <p class="card-text"> {{ad.city}} - {{ad.zipcode}} </p>
+
+                                <p class="card-text"> {{ad.state}} </p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    {% endfor %}
+
+
+                </div>
+
+                <button id="button"  type="submit" class="btn btn-warning mt-3">countinue</button>
+
+            </form>
+            {% else %}
+            <div class="container">
+                <div class="col-lg-10 ">
+                  <div class="card text-center " style="width: 22rem;">
+                    <div class="card-body">
+                      <h5 class="card-title text-center">{{empty}}</h5>
+                      <img class="card-img-top shadow" src="{% static 'store/images/address_not_found.webp' %}"
+                        alt="Card image cap">
+                      <!-- { static 'store/store/images/cartimage.png' } -->
+                      <a id="button"  href="{% url 'address' %}" class=" btn btn-primary mt-2 mx-5">Add Address</a>
+                     
+                    </div>
+        
+                  </div>
+                </div>
+              </div>
+
+
+            {% endif  %}
+
+
+
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+
+
+
+
+<!-- 
+
+
+
+<form action="/paymentdone">
+    {% for ad in add %}
+    <div class="form-check mt-2 mb-5">
+        <input class="form-check-input" type="radio" name="custid" id="custid{{forloop.counter}}"
+            value="{{ad.id}}">
+
+        <label class="form-check-label fw-bold" for=""> Address : {{forloop.counter}} </label>
+
+
+
+        <h5> {{ad.name}} </h5>
+        <p> {{ad.locality}} , {{ad.city}}, {{ad.state}} -{{ad.zipcode}} </p>
+    </div>
+
+    {% endfor %}
+    <button type="submit" class="btn btn-warning mt-3">countinue</button>
+
+</form> -->

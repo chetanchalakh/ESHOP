@@ -1,0 +1,18 @@
+
+a.active:hover{
+    transform: scale(1.1);
+
+}
+
+#catagaoryitem:hover{
+   
+    background: #8ca2c3;
+    text-decoration: antiquewhite;
+    
+
+}
+
+#button:hover{
+    transform: scale(1.04);
+
+}

@@ -1,0 +1,31 @@
+{% extends 'store/base.html' %}
+{% block content %}
+<div class="container">
+    <div class="p-2 m-2">
+        <div class="col-lg-5 mx-auto">
+            <h4 class="text-center alert alert-info">Bookshop</h4>
+            <div class="card border-primary" style="width: 33rem;">
+                <div class="card-body">
+                  <h5 class="card-title">Update Book Details</h5>
+                  <p class="card-text"> <form action="" method="POST" novalidate>
+                    {% csrf_token %}
+                    {% for fm in form %}
+                     {{fm.label_tag}} {{fm}} {{fm.errors|striptags}} <br>
+                    {% endfor %}
+                    <input class="btn btn-success" type="submit" value="Update">
+                    <a class="btn btn-success" href="{% url 'addshow' %}">Back</a>
+                </form></p>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+
+<!-- <form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input class="btn btn-success" type="submit" value="Update">
+    <a class="btn btn-success" href="{% url 'addshow' %}">Back</a>
+</form> -->

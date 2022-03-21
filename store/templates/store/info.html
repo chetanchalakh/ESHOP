@@ -1,0 +1,74 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block css %}
+<style>
+    .card {
+        background-color: whitesmoke;
+
+    }
+
+    body {
+        background-color: bisque;
+    }
+
+    .carousel-item {
+        height: 70vh;
+    }
+</style>{% endblock css %}
+{% block content %}
+<div class="container-fluid mt-1 mx-1">
+    <div class="row">
+            <div class=" col-lg-7 d-flex">
+                <div class="card border-primary mt-1 " style="width: 50rem;">
+                    <div class="card-body d-flex">
+                        <div>
+                            <h5 class="text-center">{{pi.name}}</h5><br>
+                            <div class="card border-light" style="width: 13rem;">
+                                <img class="card-img-top shadow" src="{{pi.image.url}}" alt="Card image cap">
+                            </div>
+                            <h3>₹ {{pi.price}}<br></h3>
+                            <form class="d-inline" action="/addtocart" methode="POST">
+                                <input hidden type="text" name="product" value="{{pi.id}}">
+                                <input id="button"  type="submit" value="Buy Now" class="btn btn-success">
+                                <!-- {% csrf_token %} -->
+                                <input hidden type="text" name="product" value="{{pi.id}}">
+                                <input id="button"  type="submit" value="Add to cart" class="btn btn-warning">
+                            </form>
+                        </div>
+
+
+                        <div class="mx-5">
+                            <h5 class="text-center alert alert-primary ">Book Details</h5>
+                            <h4>Book Name : {{pi.name}}</h4>
+                            <h5>Author : {{pi.auth_name}}</h5>
+                            <h6>About Book: </h6>
+                            <p>{{pi.description}}</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        <div class="col-lg-5 mt-1">
+            <div class="row ">
+                {% for item in product %}
+                <div id="card" class="card py-0 px-0 mx-3 my-2 shadow
+                  }" style="width: 13rem;">
+                    <div class="cardimage">
+                        <a href="{% url 'info' item.id %}"><img class="card-img-top" src="{{item.image.url}}"></a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{item.name}}</h5>
+                        <h4 class="card-text"> <b>₹{{item.price}}</b> </h4>
+
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+{% endblock content %}

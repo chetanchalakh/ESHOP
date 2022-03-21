@@ -1,0 +1,109 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block css %} {% endblock css %}
+{% block content %}
+<div class="container-fluid mt-3 mx-1">
+    <div class="row">
+        <div class="col-lg-3">
+            <h4 class="text-center text-white alert bg-primary">Wellcome {{name}}</h4>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <li  class="text-center "> <div><a class="nav-link active" aria-current="page"  href="{% url 'profile' %}" class="">
+                    <h5>Profile</h5> 
+                </a> </div></li> <br>
+
+                <li class="text-center"> <div><a class="nav-link active" aria-current="page" href="{% url 'address' %}" class=" ">
+                   <h5> Address</h5>
+                </a></div>  </li>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-lg-5">
+            <h4 class="text-center text-white alert bg-primary">Profile</h4>
+
+            {% if messages %}
+            {% for message in messages %}
+            <small {% if message.tags %} class="{message.tags}" {% endif %}>
+                {{message}}
+            </small>
+            {% endfor %}
+            {% endif %}
+            <div class="card border-primary" style="width: 33rem;">
+                <div class="card-body">
+                    <h3>Wellcome {{name}}</h3>
+                    <p class="card-text">
+                    <form action="" method="POST" novalidate>
+                        {% csrf_token %}
+                        {% for fm in form %}
+                        {{fm.label_tag}} {{fm}} {{fm.errors|striptags}} <br>
+                        {% endfor %}
+                        <input id="button"  class="btn btn-success" type="submit" value="Update">
+                        <div>
+                            <a id="button" class="text-center text-white btn btn-success mt-2 " href="{% url 'logout' %}">Logout</a>
+                            <a id="button"  class="text-center text-white btn btn-success mt-2" href="">Change Password</a>
+                            <a id="button"  class="btn btn-success mt-2" href="{% url 'home' %}">Back</a>
+                        </div>
+                    </form>
+                    </p>
+                </div>
+
+
+
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock content %}
+<!-- <form action="" method="POST">
+    {% csrf_token %}
+    {% for fm in form %}
+    {{fm.label_tag}} {{fm}} {{fm.errors|striptags}} <br><br>
+    {% endfor %}
+    <input type="submit" class="btn btn-success" value="Update"><br>
+</form> -->
+
+
+
+
+
+
+
+<!-- <div class="container-fluid mt-3 mx-1">
+    <div class="row">
+       
+        <div class="col-lg-5">
+            <h4 class="text-center text-white alert bg-primary">Profile</h4>
+
+            {% if messages %}
+            {% for message in messages %}
+            <small {% if message.tags %} class="{message.tags}" {% endif %}>
+                {{message}}
+            </small>
+            {% endfor %}
+            {% endif %}
+            <div class="card border-primary" style="width: 33rem;">
+                <div class="card-body">
+                    <h3>Wellcome {{name}}</h3>
+                    <p class="card-text">
+                    <form action="" method="POST" novalidate>
+                        {% csrf_token %}
+                        {% for fm in form %}
+                        {{fm.label_tag}} {{fm}} {{fm.errors|striptags}} <br>
+                        {% endfor %}
+                        <input class="btn btn-success" type="submit" value="Update">
+                        <div>
+                            <a class="text-center text-white btn btn-success mt-2 " href="{% url 'logout' %}">Logout</a>
+                            <a class="text-center text-white btn btn-success mt-2" href="">Change Password</a>
+                            <a class="btn btn-success mt-2" href="{% url 'home' %}">Back</a>
+                        </div>
+                    </form>
+                    </p>
+                </div>
+            </div>
+        </div>  -->

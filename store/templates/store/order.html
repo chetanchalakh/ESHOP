@@ -1,0 +1,95 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block css %} <style>
+
+</style>
+{% endblock css %}
+{% block content %}
+<div class="container-fluid mt-3 mx-1">
+  <div class="row">
+    <div class="col-lg-5 ">
+
+      {% if messages %}
+      {% for message in messages %}
+      <small {% if message.tags %} class="{message.tags}" {% endif %}>
+           swal('{{message}}')
+      </small>
+      {% endfor %}
+      {% endif %}
+
+      
+
+
+
+
+
+
+
+
+      {% if order_placed %}
+      <h4 class="text-center card-header bg-light mx-3">Order </h4>
+      {% for op in order_placed %}
+      <div class="card mb-3 mx-3 my-2" style="max-width: 540px;">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img src="{{op.product.image.url}}" class="card-img" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{op.product.name}}</h5>
+              <p class="card-text">order id : {{op.id}}</p>
+              <p class="card-text">
+              <div class="my-3">
+                <p> Quantity : {{op.quantity}} </p>
+
+                <p> Order date {{op.order_date}} </p>
+                <p class="p-2 mb-1 bg-success text-white"> status : {{op.status}} </p>
+
+              </div>
+              <form class="d-inline" action="{% url 'cancel_item' op.id %}" method="post">
+                {% csrf_token %}
+                <input id="button" class="btn btn-light border-success" type="submit" value="Cancel Order">
+              </form>
+              <!-- <a href="#" class="btn btn-light border-success">Remove</a> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% else %}
+      <div class="container">
+        <div class="col-lg-10 ">
+          <div class="card text-center " style="width: 22rem;">
+            <div class="card-body">
+              <h5 class="card-title text-center">{{empty}}</h5>
+              <img class="card-img-top shadow" src="{% static 'store/images/no_order_found.webp' %}"
+                alt="Card image cap">
+              <!-- { static 'store/store/images/cartimage.png' } -->
+              <a id="button" href="{% url 'home' %}" class=" btn btn-primary mt-2 mx-5">Continue Shopping</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+      {% endif %}
+    </div>
+  </div>
+
+</div>
+
+ 
+
+
+
+{% endblock content %}
+
+<script>swal("Helhhhhlo world!")
+</script>

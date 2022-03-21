@@ -1,0 +1,35 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block css %} <style>
+   
+</style> {% endblock css %}
+{% block content %}
+<div  class="container">
+    <div  class="container ">
+        <div  class="col-lg-5 mx-auto">
+            {% if messages %}
+            {% for message in messages %}
+            <small {% if message.tags %} class="{message.tags}" {% endif %}>
+                {{message}}
+            </small>
+            {% endfor %}
+            {% endif %}
+            <div class="card border-primary mt-4" style="width: 35rem;">
+                <div class="card-body">
+                    <h4 class="card-title">Signup</h4>
+                    <p class="card-text">
+                    <form class="form-group" action="" method="POST" novalidate>
+                        {% csrf_token %}
+                        {% for fm in form %}
+                        {{fm.label_tag}} {{fm}} {{fm.errors|striptags}} <br>
+                        {% endfor %}
+                        <input type="submit" class="btn btn-success" value="Submit">
+                        <a class="text-center text-white btn btn-success" href="{% url 'login' %}">login</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock content %}

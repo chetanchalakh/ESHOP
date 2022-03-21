@@ -1,0 +1,85 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block css %} <style>
+    .cardimage {
+        overflow: hidden;
+
+    }
+
+    .cardimage img {
+        transition: all 1s ease;
+    }
+
+    .cardimage:hover img {
+        transform: scale(1.1);
+    }
+    body{
+        background-color:whitesmoke;
+    
+    }
+</style>{% endblock css %}
+{% block content %}
+<div class="container-fluid mt-3 mx-1">
+    <div class="row">
+        <!-- catagory -->
+        <div class="col-lg-2 mx-auto">
+            <div class="list-group">
+                <a id="catagaoryitem" href="/" class="list-group-item list-group-item-action border-success">All Books</a>
+                {% for catagory in catagory %}
+
+                <a id="catagaoryitem"  href="/?catagory={{catagory.id}}"
+                    class="list-group-item list-group-item-action border-success text-dark">{{catagory.name}}</a>
+                {% endfor %}
+
+
+
+                <!-- this is verticle dropdown for by author -->
+            
+                <ul class="list-group-item group-item-action border-success">
+                    <li class="list-group nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <h6>by Author</h6>
+                        </a>
+                        <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="">Chetan Bhagat</a></li>
+                            <li><a class="dropdown-item" href="">Dr. kalam</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="">swami Vivekanand</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <!-- this is end verticle dropdown for by author -->
+
+            </div>
+        </div>
+        <!-- all product -->
+        <div class="col-lg-10 mx-auto">
+            <div class="row mx-auto">
+                <!-- <h4 class="text-center alert alert-primary">Add new Student</h4> -->
+                {% for item in product %}
+
+                <div id="card" class="card py-0 px-0 mx-1 my-1 shadow
+                  }" style="width: 16rem;">
+                    <div class="cardimage">
+                        <a href="{% url 'info' item.id %}"><img class="card-img-top" src="{{item.image.url}}"></a>
+                    </div>
+
+                    <div class="card-body">
+                        <h5 class="card-title">{{item.name}}</h5>
+                        <h4 class="card-text"> <b>₹{{item.price}}</b> </h4>
+                        <!-- <a href="" class="btn btn-primary btn-sm">Add to cart</a> -->
+                    </div>
+                </div>
+
+                {% endfor %}
+            </div>
+        </div>
+
+
+    </div>
+</div>
+{% endblock content %}

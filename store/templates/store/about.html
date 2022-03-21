@@ -1,0 +1,91 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block css %}
+<style>
+    body {
+        background-color: bisque ;
+    }
+    .carousel-item{
+        height: 70vh;
+    }
+
+</style>
+{% endblock css %}
+{% block content %}
+<div class="container-fluid mt-2 mx-1">
+    <div class="row">
+
+        <div class="col-lg-5 mt-2  " >
+
+
+            <div class="card w-100 ">
+                <div class="card-body  bg-transparent text-dark">
+                  <h3 class="card-title">About us</h3>
+                  <p class="card-text ">“I pronounce after all there is no pleasure like perusing!”- Jane Austen, Pride, and Prejudice. <br>
+
+                   <b> Dear readers,</b>
+                    
+                   <p  >We offer a tremendous gathering of books in the various classifications of Fiction, Non-fiction, Biographies, History, Religions, Self – Help, Children. We likewise move in immense accumulation of Investments and Management, Computers, Engineering, Medical, College and School content references books proposed by various foundations as schedule the nation over. Other than this, we likewise offer an expansive gathering of E-Books at reasonable valuing. </p>  <br>
+                    
+                    We endeavor to broaden consumer loyalty by providing food simple easy using web indexes, brisk and easy-to-understand installment alternatives, and snappier conveyance frameworks. Upside to the majority of this, we are arranged to give energizing offers and charming limits on our books.
+                    
+                    Too, we modestly welcome every one of the merchants around the nation to band together with us. We will without a doubt give you the stage to many shimmering areas and develop the “Organization Name” family. We might want to thank you for shopping with us. You can keep in touch with us for any new musings at “email-id” helping us to ad-lib for the peruser fulfillment.</p>
+                </div>
+              </div>
+
+
+        </div>
+        <div class='col-sm-7 mt-2'>
+
+            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                        aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="{% static 'store/images/book1.webp' %}" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+
+                            <p class="bg-light text-dark" > “The more that you read, the more things you will know. The more that you learn, the more places you’ll go.”</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'store/images/book2.jpg' %}" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <p  class="bg-light text-dark ">“If you don’t like to read, you haven’t found the right book.”</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'store/images/1.webp' %}" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                        
+                            <p  class="bg-light text-dark">“The man who does not read good books is no better than the man who can’t.”.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+{% endblock content %}
